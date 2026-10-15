@@ -1,206 +1,700 @@
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>⚡ MRBEAST $1,000,000 CASINO CHALLENGE ⚡</title>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <title>BEAST CASINO | VIP $10,000,000 Challenge</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            beast: {
+              pink: '#FF007F',
+              cyan: '#00F2FE',
+              gold: '#FFD700',
+              purple: '#7928CA',
+              dark: '#0B0E14',
+              card: '#151A23',
+              accent: '#1F2937'
+            }
+          },
+          animation: {
+            'glow-pulse': 'glowPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'bounce-subtle': 'bounceSubtle 1.5s infinite',
+            'screen-shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
+          },
+          keyframes: {
+            glowPulse: {
+              '0%, 100%': { filter: 'drop-shadow(0 0 15px rgba(0, 242, 254, 0.4))' },
+              '50%': { filter: 'drop-shadow(0 0 25px rgba(255, 0, 127, 0.6))' }
+            },
+            bounceSubtle: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-4px)' }
+            },
+            shake: {
+              '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+              '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+              '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
+              '40%, 60%': { transform: 'translate3d(4px, 0, 0)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    :root {
-      --primary: #00f2fe;
-      --accent: #ff007f;
-      --gold: #ffd700;
-      --bg: #0a0a16;
+    /* Glassmorphism & Custom Scrollbar */
+    .glass-panel {
+      background: rgba(21, 26, 35, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
-
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg);
-      font-family: 'Impact', 'Arial Black', sans-serif;
-      color: white;
-      text-align: center;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow-x: hidden;
+    .glass-panel-glow {
+      background: rgba(21, 26, 35, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.15);
     }
-
-    /* BANNER MRBEAST */
-    .header {
-      background: linear-gradient(45deg, var(--accent), var(--primary));
-      width: 100%;
-      padding: 15px 0;
-      box-shadow: 0 0 20px var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 1.8rem;
-      text-shadow: 2px 2px #000;
-      animation: pulse 1.5s infinite alternate;
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
     }
-
-    @keyframes pulse {
-      0% { transform: scale(0.99); }
-      100% { transform: scale(1.01); filter: drop-shadow(0 0 15px var(--accent)); }
+    ::-webkit-scrollbar-track {
+      background: #0B0E14;
     }
-
-    /* CONTENEDOR PRINCIPAL */
-    .casino-card {
-      background: rgba(20, 20, 35, 0.9);
-      border: 4px solid var(--gold);
-      border-radius: 20px;
-      padding: 30px;
-      margin: 20px;
-      max-width: 450px;
-      box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    ::-webkit-scrollbar-thumb {
+      background: #1F2937;
+      border-radius: 3px;
     }
-
-    .balance-box {
-      font-size: 2.2rem;
-      color: #00ff66;
-      text-shadow: 0 0 10px #00ff66;
-      margin: 15px 0;
-      background: #050510;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #00ff66;
+    ::-webkit-scrollbar-thumb:hover {
+      background: #FF007F;
     }
-
-    /* TRAGAMONEDAS */
-    .slots {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin: 25px 0;
-    }
-
-    .reel {
-      width: 90px;
-      height: 90px;
-      background: #111;
-      border: 3px solid var(--primary);
-      border-radius: 15px;
-      font-size: 3.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 0 10px #000;
-    }
-
-    /* BOTONES */
-    .btn {
-      background: linear-gradient(180deg, #ffcc00, #ff8800);
-      border: none;
-      color: black;
-      padding: 15px 40px;
-      font-size: 1.8rem;
-      font-weight: bold;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 6px 0 #b35900, 0 0 20px var(--gold);
-      transition: all 0.1s;
-      text-transform: uppercase;
-    }
-
-    .btn:active {
-      transform: translateY(4px);
-      box-shadow: 0 2px 0 #b35900;
-    }
-
-    /* MODAL TROLL */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.95);
-      z-index: 100;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .modal-content {
-      background: #1a1a2e;
-      border: 5px solid var(--accent);
-      border-radius: 20px;
-      padding: 30px;
-      max-width: 500px;
-      animation: popIn 0.3s ease-out;
-    }
-
-    @keyframes popIn {
-      0% { transform: scale(0); }
-      80% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-
-    .troll-img {
-      width: 200px;
-      border-radius: 10px;
-      margin: 15px 0;
-    }
-
-    .claim-btn {
-      background: #00ff66;
-      color: black;
-      padding: 12px 30px;
-      font-size: 1.4rem;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 15px;
+    .slot-blur {
+      filter: blur(3px);
     }
   </style>
 </head>
-<body>
+<body class="bg-beast-dark text-slate-100 font-sans min-h-screen flex flex-col justify-between overflow-x-hidden select-none">
 
-  <div class="header">
-    🔥 MRBEAST CASINO: WIN $10,000,000 🔥
-  </div>
-
-  <div class="casino-card">
-    <p style="font-size: 1.2rem; margin: 0;">TU BALANCE DISPONIBLE:</p>
-    <div class="balance-box" id="balance">$1,000,000</div>
-
-    <div class="slots">
-      <div class="reel" id="r1">⚡</div>
-      <div class="reel" id="r2">💵</div>
-      <div class="reel" id="r3">🐯</div>
-    </div>
-
-    <button class="btn" onclick="spin()">¡GIRAR GRATIS!</button>
-  </div>
-
-  <!-- MODAL DEL TROLLAZO -->
-  <div class="modal" id="trollModal">
-    <div class="modal-content">
-      <h1 style="color: var(--gold); font-size: 2.5rem; margin: 0;">🎉 ¡¡GANASTE $10,000,000!! 🎉</h1>
-      <p style="font-size: 1.3rem; color: #fff;">MrBeast te acaba de transferir el premio mayor a tu cuenta bancaria.</p>
+  <!-- TOP HEADER -->
+  <header class="sticky top-0 z-40 glass-panel border-b border-slate-800/80 px-4 lg:px-8 py-3">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
       
-      <!-- GIF/Imagen Troll -->
-      <img src="https://media.giphy.com/media/gd09Y2Ptu7gsiPVUrv/giphy.gif" class="troll-img" alt="Trollface">
+      <!-- BRAND LOGO -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-beast-pink to-beast-cyan p-0.5 animate-glow-pulse">
+          <div class="w-full h-full bg-beast-dark rounded-[10px] flex items-center justify-center">
+            <i class="fa-solid fa-bolt text-beast-cyan text-xl"></i>
+          </div>
+        </div>
+        <div>
+          <span class="font-display font-extrabold text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-beast-cyan via-white to-beast-pink">BEAST</span>
+          <span class="text-xs font-bold bg-beast-pink/20 text-beast-pink px-2 py-0.5 rounded-full ml-1 border border-beast-pink/30 uppercase tracking-widest">VIP CASINO</span>
+        </div>
+      </div>
 
-      <p style="color: var(--accent); font-size: 1.1rem;">*Para reclamar tu dinero real, primero debes pagar la tarifa de envío de $5 USD en la tarjeta de tu papá.*</p>
+      <!-- MIDDLE BADGE (LIVE USERS) -->
+      <div class="hidden md:flex items-center gap-2 bg-slate-900/80 border border-slate-800 px-4 py-1.5 rounded-full text-xs font-medium text-slate-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="text-slate-200 font-bold" id="liveUsersCount">14,892</span> Jugadores en Vivo
+      </div>
 
-      <p style="font-size: 1.5rem; color: #00f2fe; margin-top: 15px;">🤣 ¡CAÍSTE MANO, ES UNA BROMA! 🤣</p>
+      <!-- BALANCE & ACTIONS -->
+      <div class="flex items-center gap-3">
+        
+        <!-- SOUND TOGGLE -->
+        <button id="soundToggleBtn" onclick="toggleAudio()" class="w-10 h-10 rounded-xl glass-panel flex items-center justify-center text-slate-400 hover:text-white hover:border-beast-cyan transition">
+          <i id="soundIcon" class="fa-solid fa-volume-high text-sm"></i>
+        </button>
 
-      <button class="claim-btn" onclick="closeModal()">SEGUIR PERDIENDO EL TIEMPO</button>
+        <!-- DEV PANEL TRIGGER BUTTON -->
+        <button onclick="toggleDevConsole()" class="w-10 h-10 rounded-xl glass-panel border-amber-500/30 text-amber-400 hover:bg-amber-500/10 transition flex items-center justify-center relative group" title="Consola de Trucos / Dev">
+          <i class="fa-solid fa-code text-sm"></i>
+          <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-400 rounded-full animate-ping"></span>
+        </button>
+
+        <!-- BALANCE DISPLAY -->
+        <div class="glass-panel px-4 py-1.5 rounded-xl border-emerald-500/30 flex items-center gap-3">
+          <div class="text-right">
+            <div class="text-[10px] font-bold tracking-wider text-slate-400 uppercase">Balance Real</div>
+            <div class="font-display font-black text-emerald-400 text-lg leading-none" id="userBalance">$1,000,000</div>
+          </div>
+          <button onclick="openModal('depositModal')" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-extrabold px-3 py-2 rounded-lg text-xs shadow-lg shadow-emerald-500/20 transition active:scale-95 flex items-center gap-1.5">
+            <i class="fa-solid fa-wallet"></i>
+            <span>DEPOSITAR</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main id="mainContainer" class="max-w-7xl mx-auto px-4 lg:px-8 py-6 flex-grow w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- LEFT SIDEBAR: VIP PROGRESS & LEADERSHIP -->
+    <aside class="lg:col-span-3 flex flex-col gap-5">
+      
+      <!-- VIP STATUS CARD -->
+      <div class="glass-panel p-5 rounded-2xl relative overflow-hidden">
+        <div class="absolute -right-6 -bottom-6 text-slate-800/20 text-8xl font-black select-none pointer-events-none">
+          <i class="fa-solid fa-crown"></i>
+        </div>
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-bold text-beast-gold uppercase tracking-widest flex items-center gap-1.5">
+            <i class="fa-solid fa-crown"></i> Rango VIP Beast
+          </span>
+          <span class="text-xs font-extrabold bg-beast-gold/20 text-beast-gold px-2 py-0.5 rounded border border-beast-gold/30">NIVEL 9</span>
+        </div>
+        <div class="text-xl font-display font-black text-white mb-1">DIAMANTE MASTER</div>
+        <p class="text-xs text-slate-400 mb-4">A $50,000 de desbloquear la Isla Privada de MrBeast.</p>
+        
+        <!-- PROGRESS BAR -->
+        <div class="w-full bg-slate-900 rounded-full h-2.5 p-0.5 border border-slate-800">
+          <div class="bg-gradient-to-r from-beast-pink via-purple-500 to-beast-cyan h-1.5 rounded-full w-[88%] transition-all duration-500"></div>
+        </div>
+        <div class="flex justify-between text-[10px] font-semibold text-slate-500 mt-2">
+          <span>88% Completado</span>
+          <span class="text-beast-cyan">VIP ELITE</span>
+        </div>
+      </div>
+
+      <!-- LIVE WINNERS FEED -->
+      <div class="glass-panel p-4 rounded-2xl flex-grow flex flex-col">
+        <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Ganadores en Vivo</span>
+          </div>
+          <span class="text-[10px] text-slate-500 font-mono">FEED REAL</span>
+        </div>
+
+        <div id="winnersList" class="flex flex-col gap-2.5 overflow-hidden max-h-[320px] text-xs">
+          <!-- Dynamic Winner Rows Inject Here -->
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- CENTER GAME AREA: SLOT MACHINE -->
+    <section class="lg:col-span-9 flex flex-col gap-6">
+      
+      <!-- HERO PROMO BANNER -->
+      <div class="relative rounded-2xl p-6 overflow-hidden bg-gradient-to-r from-purple-950/80 via-beast-dark to-slate-950 border border-beast-cyan/30 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="absolute -right-10 -top-10 w-48 h-48 bg-beast-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="z-10 space-y-2 text-center md:text-left">
+          <div class="inline-flex items-center gap-2 bg-beast-pink/20 text-beast-pink border border-beast-pink/40 text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+            <i class="fa-solid fa-fire animate-bounce"></i> Desafío Oficial MrBeast #402
+          </div>
+          <h1 class="text-2xl md:text-4xl font-display font-black text-white tracking-tight">
+            GIRA Y GANA <span class="text-transparent bg-clip-text bg-gradient-to-r from-beast-gold via-amber-300 to-yellow-500">$10,000,000 DE DÓLARES</span>
+          </h1>
+          <p class="text-xs md:text-sm text-slate-300 max-w-xl">
+            Si consigues los 3 logos de <span class="text-beast-cyan font-bold">MrBeast VIP</span> en la línea central, ¡MrBeast te enviará la maleta de efectivo directamente a tu casa!
+          </p>
+        </div>
+        <div class="z-10 shrink-0">
+          <button onclick="openModal('infoModal')" class="glass-panel hover:bg-slate-800 text-slate-200 text-xs font-bold px-4 py-2.5 rounded-xl border border-slate-700 transition flex items-center gap-2">
+            <i class="fa-solid fa-circle-info text-beast-cyan"></i> Reglas del Reto
+          </button>
+        </div>
+      </div>
+
+      <!-- MAIN SLOT MACHINE CABINET -->
+      <div class="glass-panel-glow p-6 md:p-8 rounded-3xl relative flex flex-col items-center">
+        
+        <!-- CASINO BRANDING HEADER -->
+        <div class="flex items-center justify-between w-full mb-6 border-b border-slate-800/80 pb-4">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-gem text-beast-pink text-xl"></i>
+            <span class="font-display font-extrabold tracking-wider text-sm text-slate-200">BEAST MEGA SLOTS v3.4</span>
+          </div>
+          <div class="flex items-center gap-4 text-xs font-mono text-slate-400">
+            <div>MULTI: <span class="text-beast-gold font-bold">x5000</span></div>
+            <div>RTP: <span class="text-emerald-400 font-bold">99.8%</span></div>
+          </div>
+        </div>
+
+        <!-- SLOT DISPLAY REELS CONTAINER -->
+        <div class="w-full bg-slate-950/90 border-4 border-slate-800 rounded-2xl p-4 md:p-6 shadow-inner relative overflow-hidden my-2">
+          
+          <!-- WINNING PAYLINE INDICATOR LINE -->
+          <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-24 border-y-2 border-beast-gold/60 bg-beast-gold/5 pointer-events-none z-10 flex items-center justify-between px-2">
+            <div class="bg-beast-gold text-slate-950 text-[10px] font-black px-1.5 py-0.5 rounded shadow">LÍNEA 1</div>
+            <div class="bg-beast-gold text-slate-950 text-[10px] font-black px-1.5 py-0.5 rounded shadow">LÍNEA 1</div>
+          </div>
+
+          <!-- REELS GRID (3 REELS x 3 VISIBLE ROWS) -->
+          <div class="grid grid-cols-3 gap-3 md:gap-6 relative z-0">
+            
+            <!-- REEL 1 -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden h-64 md:h-72 flex flex-col items-center justify-center relative">
+              <div id="reel1" class="flex flex-col items-center gap-8 py-4 transition-transform duration-100">
+                <div class="text-5xl md:text-6xl slot-symbol">⚡</div>
+                <div class="text-5xl md:text-6xl slot-symbol">💵</div>
+                <div class="text-5xl md:text-6xl slot-symbol">🐯</div>
+              </div>
+            </div>
+
+            <!-- REEL 2 -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden h-64 md:h-72 flex flex-col items-center justify-center relative">
+              <div id="reel2" class="flex flex-col items-center gap-8 py-4 transition-transform duration-100">
+                <div class="text-5xl md:text-6xl slot-symbol">💎</div>
+                <div class="text-5xl md:text-6xl slot-symbol">🚀</div>
+                <div class="text-5xl md:text-6xl slot-symbol">🍔</div>
+              </div>
+            </div>
+
+            <!-- REEL 3 -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden h-64 md:h-72 flex flex-col items-center justify-center relative">
+              <div id="reel3" class="flex flex-col items-center gap-8 py-4 transition-transform duration-100">
+                <div class="text-5xl md:text-6xl slot-symbol">🐯</div>
+                <div class="text-5xl md:text-6xl slot-symbol">⚡</div>
+                <div class="text-5xl md:text-6xl slot-symbol">💎</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- CONTROL PANEL & SPIN BUTTON -->
+        <div class="w-full mt-6 flex flex-col md:flex-row items-center justify-between gap-4 bg-slate-900/60 border border-slate-800/80 p-4 rounded-2xl">
+          
+          <!-- BET AMOUNT SELECTOR -->
+          <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Apuesta:</span>
+            <div class="flex items-center bg-slate-950 border border-slate-800 rounded-xl p-1">
+              <button onclick="adjustBet(-50000)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm transition active:scale-95">-</button>
+              <span id="betDisplay" class="px-4 font-mono font-extrabold text-beast-gold text-sm">$100,000</span>
+              <button onclick="adjustBet(50000)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm transition active:scale-95">+</button>
+            </div>
+            <button onclick="setBet(1000000)" class="text-[10px] font-bold bg-beast-pink/20 text-beast-pink border border-beast-pink/40 px-2.5 py-2 rounded-lg hover:bg-beast-pink/30 transition">MAX</button>
+          </div>
+
+          <!-- SPIN BUTTON -->
+          <button id="spinBtn" onclick="triggerSpin()" class="w-full md:w-auto flex-grow max-w-md bg-gradient-to-r from-beast-gold via-amber-400 to-yellow-500 hover:from-yellow-400 hover:to-amber-300 text-slate-950 font-display font-black text-xl py-4 px-8 rounded-2xl shadow-xl shadow-amber-500/20 active:scale-95 transition duration-150 flex items-center justify-center gap-3 tracking-wider uppercase border-2 border-yellow-200">
+            <i class="fa-solid fa-rotate-right text-2xl"></i>
+            <span>¡GIRAR AHORA!</span>
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- HIDDEN DEVELOPER / TRICK CODE CONSOLE PANEL -->
+  <div id="devConsoleModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border-2 border-amber-500/60 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+      <button onclick="toggleDevConsole()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4 text-amber-400 border-b border-slate-800 pb-3">
+        <i class="fa-solid fa-terminal text-xl"></i>
+        <h3 class="font-display font-bold text-lg">PANEL DE CONTROL DE TRUCOS (TROLOGÍA)</h3>
+      </div>
+
+      <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+        Usa este panel secreto para garantizar que tu amigo gane el <span class="text-beast-gold font-bold">Jackpot de $10 Millones</span> en el siguiente tiro y se active la broma final de MrBeast.
+      </p>
+
+      <!-- RIGGED GUARANTEE BUTTON -->
+      <div class="space-y-4">
+        <button id="riggedToggleBtn" onclick="toggleRiggedMode()" class="w-full py-4 px-4 rounded-xl font-display font-black text-sm tracking-wider uppercase transition flex items-center justify-center gap-3 bg-red-600/20 text-red-400 border border-red-500/40 hover:bg-red-600/30">
+          <i class="fa-solid fa-skull"></i>
+          <span id="riggedStatusText">MODO TRUCADO: DESACTIVADO</span>
+        </button>
+
+        <!-- CODE INPUT FORM -->
+        <div class="pt-2 border-t border-slate-800">
+          <label class="block text-[11px] font-bold text-slate-400 mb-2 uppercase">O ingresa un código de desarrollador:</label>
+          <div class="flex gap-2">
+            <input type="text" id="devCodeInput" placeholder="Ej. BEAST2026 / RIGGED" class="flex-grow bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs font-mono text-amber-400 focus:outline-none focus:border-amber-500">
+            <button onclick="applyDevCode()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition">APLICAR</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 text-[10px] text-slate-500 text-center font-mono">
+        TIP: También puedes presionar la tecla rápida <kbd class="bg-slate-800 px-1.5 py-0.5 rounded text-slate-300">T</kbd> en tu teclado para activar el truco en secreto.
+      </div>
     </div>
   </div>
 
+  <!-- PRANK REVEAL MODAL (JACKPOT TROLL) -->
+  <div id="prankModal" class="fixed inset-0 bg-slate-950/95 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border-4 border-beast-gold rounded-3xl max-w-md w-full p-6 text-center shadow-2xl relative animate-bounce-subtle">
+      
+      <!-- TROPHY ICON -->
+      <div class="w-20 h-20 bg-gradient-to-tr from-beast-gold to-amber-300 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-950 text-4xl shadow-lg shadow-amber-500/40">
+        <i class="fa-solid fa-trophy"></i>
+      </div>
+
+      <h2 class="font-display font-black text-3xl text-beast-gold tracking-tight mb-1">
+        ¡¡JACKPOT MASIVO!!
+      </h2>
+      <p class="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-4">HAS GANADO $10,000,000 DE DÓLARES</p>
+
+      <!-- TROLL GIF / MEME DISPLAY -->
+      <div class="rounded-2xl overflow-hidden border-2 border-beast-pink/50 mb-4 bg-slate-950">
+        <img src="https://media.giphy.com/media/gd09Y2Ptu7gsiPVUrv/giphy.gif" alt="MrBeast Trollface" class="w-full h-48 object-cover">
+      </div>
+
+      <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 mb-4 text-left space-y-1 text-xs">
+        <div class="text-slate-400">Transferencia enviada por: <span class="text-white font-bold">Jimmy Donaldson (MrBeast)</span></div>
+        <div class="text-slate-400">Estado del pago: <span class="text-amber-400 font-bold">Pendiente de Verificación</span></div>
+      </div>
+
+      <p class="text-xs text-beast-pink font-semibold mb-6">
+        *Para liberar tus $10,000,000 en efectivo, debes pagar una pequeña tarifa de envío de $5 USD con la tarjeta de crédito de tu mamá.*
+      </p>
+
+      <div class="text-xl font-display font-black text-beast-cyan mb-4 animate-pulse">
+        🤣 ¡CAÍSTE MANO, ES UNA BROMA! 🤣
+      </div>
+
+      <button onclick="closeModal('prankModal')" class="w-full bg-gradient-to-r from-beast-pink to-purple-600 hover:from-beast-pink/90 hover:to-purple-500 text-white font-display font-bold py-3.5 px-6 rounded-xl text-sm transition shadow-lg shadow-beast-pink/30">
+        SEGUIR PERDIENDO EL TIEMPO
+      </button>
+
+    </div>
+  </div>
+
+  <!-- DEPOSIT MODAL -->
+  <div id="depositModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+      <button onclick="closeModal('depositModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="text-center mb-6">
+        <i class="fa-solid fa-building-columns text-emerald-400 text-3xl mb-2"></i>
+        <h3 class="font-display font-bold text-lg text-white">Cajero Rápido VIP</h3>
+        <p class="text-xs text-slate-400">Agrega saldo simulado para seguir jugando</p>
+      </div>
+      <div class="space-y-3 mb-6">
+        <button onclick="addFunds(500000)" class="w-full py-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-bold text-emerald-400 transition flex justify-between px-4">
+          <span>+ $500,000 USD</span>
+          <span class="text-slate-500">GRATIS</span>
+        </button>
+        <button onclick="addFunds(2000000)" class="w-full py-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-bold text-emerald-400 transition flex justify-between px-4">
+          <span>+ $2,000,000 USD</span>
+          <span class="text-slate-500">GRATIS</span>
+        </button>
+      </div>
+      <button onclick="closeModal('depositModal')" class="w-full bg-slate-800 text-slate-300 font-bold py-2.5 rounded-xl text-xs">CERRAR</button>
+    </div>
+  </div>
+
+  <!-- REGLAS MODAL -->
+  <div id="infoModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative text-xs space-y-4">
+      <button onclick="closeModal('infoModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h3 class="font-display font-bold text-base text-beast-cyan">Reglas del Reto MrBeast</h3>
+      <p class="text-slate-300 leading-relaxed">
+        1. Comienzas con un balance inicial de $1,000,000 USD.<br>
+        2. Selecciona tu apuesta y presiona GIRAR.<br>
+        3. Si alineas 3 diamantes 💎 en la línea central, ¡desbloquearás la recompensa especial!
+      </p>
+      <button onclick="closeModal('infoModal')" class="w-full bg-beast-pink text-white font-bold py-2.5 rounded-xl text-xs">ENTENDIDO</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800/80 py-4 px-4 text-center text-[11px] text-slate-500">
+    <p>© 2026 BEAST ENTERTAINMENT GROUP. Simulador visual con fines de entretenimiento y bromas entre amigos.</p>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC & AUDIO SYNTHESIS -->
   <script>
-    const items = ['⚡', '💵', '🐯', '🍔', '🚀', '💎'];
-    let spins = 0;
+    // --- GLOBAL GAME STATE ---
+    let balance = 1000000;
+    let betAmount = 100000;
+    let isSpinning = false;
+    let isRigged = false;
+    let spinCount = 0;
+    let audioEnabled = true;
 
-    function spin() {
-      spins++;
-      let btn = document.querySelector('.btn');
-      btn.disabled = true;
+    const symbols = ['⚡', '💵', '🐯', '🍔', '🚀', '💎'];
 
-      let r1 = document.getElementById
+    // --- WEB AUDIO API SYNTHESIZER ---
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new AudioContext();
+      }
+    }
+
+    function playTone(freq, type, duration) {
+      if (!audioEnabled) return;
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playSpinClick() {
+      playTone(400, 'sine', 0.05);
+    }
+
+    function playWinSound() {
+      if (!audioEnabled) return;
+      [523.25, 659.25, 783.99, 1046.50].forEach((freq, index) => {
+        setTimeout(() => playTone(freq, 'triangle', 0.3), index * 120);
+      });
+    }
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      const icon = document.getElementById('soundIcon');
+      icon.className = audioEnabled ? 'fa-solid fa-volume-high text-sm' : 'fa-solid fa-volume-xmark text-sm text-red-400';
+    }
+
+    // --- BET & BALANCE MANAGERS ---
+    function updateBalanceDisplay() {
+      document.getElementById('userBalance').innerText = '$' + balance.toLocaleString();
+    }
+
+    function adjustBet(delta) {
+      if (isSpinning) return;
+      betAmount = Math.max(50000, Math.min(1000000, betAmount + delta));
+      document.getElementById('betDisplay').innerText = '$' + betAmount.toLocaleString();
+    }
+
+    function setBet(amount) {
+      if (isSpinning) return;
+      betAmount = amount;
+      document.getElementById('betDisplay').innerText = '$' + betAmount.toLocaleString();
+    }
+
+    function addFunds(amount) {
+      balance += amount;
+      updateBalanceDisplay();
+      closeModal('depositModal');
+    }
+
+    // --- DEV / RIGGED CONSOLE LOGIC ---
+    function toggleDevConsole() {
+      const modal = document.getElementById('devConsoleModal');
+      modal.classList.toggle('hidden');
+    }
+
+    function toggleRiggedMode() {
+      isRigged = !isRigged;
+      const btn = document.getElementById('riggedToggleBtn');
+      const text = document.getElementById('riggedStatusText');
+
+      if (isRigged) {
+        btn.className = "w-full py-4 px-4 rounded-xl font-display font-black text-sm tracking-wider uppercase transition flex items-center justify-center gap-3 bg-emerald-600/20 text-emerald-400 border border-emerald-500/40 hover:bg-emerald-600/30";
+        text.innerText = "MODO TRUCADO: ACTIVADO (PRÓXIMO TIRO = JACKPOT)";
+      } else {
+        btn.className = "w-full py-4 px-4 rounded-xl font-display font-black text-sm tracking-wider uppercase transition flex items-center justify-center gap-3 bg-red-600/20 text-red-400 border border-red-500/40 hover:bg-red-600/30";
+        text.innerText = "MODO TRUCADO: DESACTIVADO";
+      }
+    }
+
+    function applyDevCode() {
+      const input = document.getElementById('devCodeInput').value.trim().toUpperCase();
+      if (input === 'BEAST2026' || input === 'RIGGED' || input === 'JACKPOT') {
+        isRigged = true;
+        toggleRiggedMode();
+        toggleDevConsole();
+      } else {
+        alert('Código inválido');
+      }
+    }
+
+    // Keyboard shortcut 'T' to toggle trick mode
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 't' || e.key === 'T') {
+        toggleRiggedMode();
+      }
+    });
+
+    // --- MAIN SLOT SPIN ANIMATION ---
+    function triggerSpin() {
+      if (isSpinning) return;
+      if (balance < betAmount) {
+        openModal('depositModal');
+        return;
+      }
+
+      initAudio();
+      isSpinning = true;
+      spinCount++;
+
+      // Deduct bet balance
+      balance -= betAmount;
+      updateBalanceDisplay();
+
+      const spinBtn = document.getElementById('spinBtn');
+      spinBtn.disabled = true;
+      spinBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+      const reels = [
+        document.getElementById('reel1'),
+        document.getElementById('reel2'),
+        document.getElementById('reel3')
+      ];
+
+      // Add blur effect during fast spin
+      reels.forEach(reel => reel.classList.add('slot-blur'));
+
+      let interval = setInterval(() => {
+        reels.forEach(reel => {
+          const symbolsDivs = reel.querySelectorAll('.slot-symbol');
+          symbolsDivs.forEach(sd => {
+            sd.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+          });
+        });
+        playSpinClick();
+      }, 70);
+
+      // Stop reels sequence
+      setTimeout(() => {
+        clearInterval(interval);
+        reels.forEach(reel => reel.classList.remove('slot-blur'));
+
+        // Determine outcome: Rigged mode active OR every 4th spin forces jackpot
+        if (isRigged || spinCount >= 4) {
+          reels.forEach(reel => {
+            const symbolsDivs = reel.querySelectorAll('.slot-symbol');
+            symbolsDivs[1].innerText = '💎'; // Middle row win
+          });
+
+          // Trigger Victory
+          playWinSound();
+          triggerConfetti();
+
+          // Screen shake animation
+          document.getElementById('mainContainer').classList.add('animate-screen-shake');
+          setTimeout(() => {
+            document.getElementById('mainContainer').classList.remove('animate-screen-shake');
+          }, 500);
+
+          // Show Prank Popup after short delay
+          setTimeout(() => {
+            openModal('prankModal');
+            isRigged = false;
+            toggleRiggedMode(); // Reset cheat toggle
+          }, 600);
+
+        } else {
+          // Normal random spin outcome
+          reels.forEach(reel => {
+            const symbolsDivs = reel.querySelectorAll('.slot-symbol');
+            symbolsDivs[1].innerText = symbols[Math.floor(Math.random() * symbols.length)];
+          });
+        }
+
+        isSpinning = false;
+        spinBtn.disabled = false;
+        spinBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+      }, 2200);
+    }
+
+    // --- CONFETTI EFFECT ---
+    function triggerConfetti() {
+      confetti({
+        particleCount: 180,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+    }
+
+    // --- MODAL HELPERS ---
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    // --- DYNAMIC LIVE WINNERS FEED GENERATOR ---
+    const mockUsers = ['Carlos_99', 'Mateo_VIP', 'Santi_Gamer', 'Juan_Crypto', 'Lucas_Beast', 'Diego_777', 'Andres_Pro'];
+    const mockPrizes = ['$250,000', '$1,200,000', '$500,000', '$5,000,000', '$750,000'];
+
+    function generateWinnerRow() {
+      const user = mockUsers[Math.floor(Math.random() * mockUsers.length)];
+      const prize = mockPrizes[Math.floor(Math.random() * mockPrizes.length)];
+      
+      const row = document.createElement('div');
+      row.className = 'flex items-center justify-between bg-slate-950/60 p-2 rounded-xl border border-slate-800/80 animate-bounce-subtle';
+      row.innerHTML = `
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded-full bg-beast-cyan/20 text-beast-cyan flex items-center justify-center font-bold text-[10px]">
+            ${user.charAt(0)}
+          </div>
+          <span class="font-medium text-slate-300">${user}</span>
+        </div>
+        <span class="font-mono font-bold text-emerald-400">${prize}</span>
+      `;
+
+      const list = document.getElementById('winnersList');
+      list.prepend(row);
+      if (list.children.length > 5) {
+        list.removeChild(list.lastChild);
+      }
+    }
+
+    // Initial rows & interval update
+    for (let i = 0; i < 4; i++) generateWinnerRow();
+    setInterval(generateWinnerRow, 3500);
+
+    // Live Users Fluctuation
+    setInterval(() => {
+      const el = document.getElementById('liveUsersCount');
+      const current = parseInt(el.innerText.replace(',', ''));
+      const next = current + Math.floor(Math.random() * 11) - 5;
+      el.innerText = next.toLocaleString();
+    }, 2500);
+  </script>
+</body>
+</html>
